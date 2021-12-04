@@ -1,9 +1,12 @@
 <template>
-  <li></li>
+  <div>
+    <li v-for="(tarea, index) in tareas" :key="index">{{ tarea.texto }}</li>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+//import { bus } from "../main";
 export default {
   data() {
     return {
@@ -14,17 +17,16 @@ export default {
     getAllData() {
       axios
         .get("https://vuetareas-98bd3-default-rtdb.firebaseio.com/tareas.json")
-        // .then((data) => data.json())
         .then((resp) => {
-          for (let id in resp) {
-            this.tareas.push(resp[id]);
-          }
+          for (let id in resp.data) {
+            this.tareas.push(resp.data[id]);
+          }         
         });
-      console.log(this.tareas.texto);
     },
   },
   created() {
     this.getAllData();
+    
   },
 };
 </script>

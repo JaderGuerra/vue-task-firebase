@@ -1,18 +1,19 @@
-import Vue from 'vue'
-import App from './App.vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import App from "./App.vue";
+import VueRouter from "vue-router";
 
+export const bus = new Vue();
 import { rutas } from "./router/router";
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
-   routes:rutas,
-   mode:'history'
-})
+  routes: rutas,
+  mode: "history",
+});
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-  router:router,
-}).$mount('#app')
+  render: (h) => h(App),
+  router: router,
+}).$mount("#app");

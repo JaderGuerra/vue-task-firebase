@@ -9,7 +9,7 @@
         class="form-control"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
-        v-model.trim="tareas.texto"
+        v-model.trim="nuevaTarea"
       />
     </div>
 
@@ -21,29 +21,33 @@
 
 <script>
 import axios from "axios";
+import {bus} from "../main.js";
+
 export default {
   data() {
     return {
-      tareas: [{ texto: "", terminada: false }],
+      nuevaTarea:'',
+      tareas: [],
     };
   },
   methods: {
     senData() {
-      if (this.tareas.texto != "") {
+      if (this.nuevaTarea !== "") {
         this.tareas.push({
-          texto: this.tareas.texto,
+          texto: this.nuevaTarea,
           terminada: false,
         });
-
-        axios.post(
+        
+         axios.post(
           "https://vuetareas-98bd3-default-rtdb.firebaseio.com/tareas.json",
           {
-            texto: this.tareas.texto,
+            texto: this.nuevaTarea,
             terminada: false,
           }
-        );
-        this.tareas.texto = "";
+        ); 
       }
+        this.nuevaTarea = "";
+        bus.$emit('datos',  this.tareas)
     },
   },
 };
