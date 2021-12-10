@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form autocomplete="off">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label mb-4"
         >Agregar Tarea</label
@@ -32,12 +32,12 @@ export default {
   },
   methods: {
     senData() {
-      if (this.nuevaTarea !== "") {
+      if (this.nuevaTarea != "") {
         this.tareas.push({
           texto: this.nuevaTarea,
           terminada: false,
         });
-        
+                
          axios.post(
           "https://vuetareas-98bd3-default-rtdb.firebaseio.com/tareas.json",
           {
