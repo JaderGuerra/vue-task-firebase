@@ -21,12 +21,12 @@
 
 <script>
 import axios from "axios";
-import {bus} from "../main.js";
+import { bus } from "../main.js";
 
 export default {
   data() {
     return {
-      nuevaTarea:'',
+      nuevaTarea: "",
       tareas: [],
     };
   },
@@ -37,17 +37,17 @@ export default {
           texto: this.nuevaTarea,
           terminada: false,
         });
-                
-         axios.post(
+
+        axios.post(
           "https://vuetareas-98bd3-default-rtdb.firebaseio.com/tareas.json",
           {
             texto: this.nuevaTarea,
             terminada: false,
           }
-        ); 
+        );
       }
-        this.nuevaTarea = "";
-        bus.$emit('datos',  this.tareas)
+      bus.$emit("datos", this.nuevaTarea);
+      this.nuevaTarea = "";
     },
   },
 };
